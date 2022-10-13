@@ -5,19 +5,24 @@ import { Slot } from "@radix-ui/react-slot";
 export interface TextProps {
   asChild?: boolean;
   children: ReactNode;
+  className?: string;
   size?: "sm" | "md" | "lg";
 }
 
-export function Text({ asChild, children, size = "md" }: TextProps) {
+export function Text({ asChild, children, className, size = "md" }: TextProps) {
   const Component = asChild ? Slot : "span";
 
   return (
     <Component
-      className={clsx("text-gray-100 font-sans", {
-        "text-xs": size === "sm",
-        "text-sm": size === "md",
-        "text-md": size === "lg",
-      })}
+      className={clsx(
+        "text-gray-100 font-sans",
+        {
+          "text-xs": size === "sm",
+          "text-sm": size === "md",
+          "text-md": size === "lg",
+        },
+        className
+      )}
     >
       {children}
     </Component>
