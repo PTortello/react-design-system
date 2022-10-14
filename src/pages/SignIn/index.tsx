@@ -6,12 +6,14 @@ import { Checkbox } from "components/Checkbox";
 import { Heading } from "components/Heading";
 import { Text } from "components/Text";
 import { TextInput } from "components/TextInput";
+import { signin } from "services/sessions";
 
 export function SignIn() {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
 
   function handleSignIn(event: FormEvent) {
     event.preventDefault();
+    signin({ email: "x@y.com", password: "12345678" });
     setIsUserSignedIn(!isUserSignedIn);
   }
 

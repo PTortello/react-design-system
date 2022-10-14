@@ -1,3 +1,7 @@
+const { mergeConfig } = require("vite");
+const viteTsconfig = require("vite-tsconfig-paths");
+const tsconfigPaths = viteTsconfig.default;
+
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -14,10 +18,13 @@ module.exports = {
     storyStoreV7: true,
     interactionsDebugger: true,
   },
+  staticDirs: ["../public"],
   viteFinal: (config, { configType }) => {
     if (configType === "PRODUCTION") {
       config.base = "/react-design-system/";
     }
-    return config;
+    return mergeConfig(config, {
+      plugins: [tsconfigPaths()],
+    });
   },
 };
